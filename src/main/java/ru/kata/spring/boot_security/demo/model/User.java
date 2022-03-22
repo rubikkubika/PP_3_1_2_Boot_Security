@@ -4,13 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -34,14 +31,11 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
-
-    @Column
-    private String status;
+    private Set<Role> roles;
 
 
     @Override

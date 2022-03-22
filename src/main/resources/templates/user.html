@@ -1,13 +1,56 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <title>Информационная страница о пользователе</title>
+    <style>
+        TABLE {
+            width: 1000px;
+            border-top: 1px solid lightgray;
+        }
+
+        TH {
+            border-bottom: 1px solid lightgray;
+        }
+
+        TR, TD {
+            border-bottom: 1px solid lightgray;
+        }
+
+        tr:nth-of-type(even) {
+            background-color: snow
+        }
+
+    </style>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
+<h2 th:align="center">Информация о пользователе</h2>
+<br>
+<table th:align="center" class="lux">
+    <tr>
+        <th th:align="left">Id</th>
+        <th th:align="left">Логин</th>
+        <th th:align="left">Имя</th>
+        <th th:align="left">Фамилия</th>
+        <th th:align="left">Роль</th>
+    </tr>
+    <tr>
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getName()}">
+        <td th:text="${user.getSurname()}"></td>
+        <td>
+            <form
+                    th:each="x:${user.getRoles()}"
+                    th:text="${x.getRole()}">
+            </form>
+        </td>
 
-<form th:method="POST" th:action="@{/logout}">
+    </tr>
+</table>
 
+<form th:method=" POST" th:action="@{/logout}">
     <input type="submit" value="Logout"/>
 </form>
 </body>

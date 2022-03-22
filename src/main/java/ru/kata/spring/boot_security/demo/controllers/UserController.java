@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -26,15 +27,17 @@ public class UserController {
         return "users";
     }
 
+    @GetMapping(value = "/user")
+    public String checkUser(ModelMap model, Principal principal) {
+                model.addAttribute("user", userService.getUserByUsername(principal.getName()));
+        return "user";
+    }
+
     @GetMapping(value = "/")
     public String welcome() {
         return "index";
     }
 
-    @GetMapping(value = "/user")
-    public String user() {
-        return "user";
-    }
 
     @GetMapping(value = "newUser")
     public String createUser(ModelMap modelMap) {
