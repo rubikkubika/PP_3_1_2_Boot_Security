@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,15 +34,14 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @Column
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
-
+    @ManyToMany
+    @JoinTable (name="users_roles",
+            joinColumns=@JoinColumn (name="user_id"),
+            inverseJoinColumns=@JoinColumn(name="role_id"))
+    private List<Role> roles;
 
     @Column
     private String status;
-
-
 
 
     @Override
@@ -60,7 +60,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     @Override
@@ -92,4 +92,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
