@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>New user</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <title>Форма для редактирования информации о пользователе</title>
 </head>
 <body>
+<h2 th:align="center">Редактирование пользователя</h2>
+<br>
 
-<form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
+<form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}" th:align="left">
 
-    <br/>
-    <label for="surname">Enter surname: </label>
-    <input type="text" th:field="*{surname}" id="surname"/>
+    <label for="name">Имя</label>
+    <input type="text" th:field="*{name}" id="name"><br><br>
 
+    <label for="surname">Фамилия</label>
+    <input type="text" th:field="*{surname}" id="surname"><br><br>
 
-    <br/>
-    <input type="submit" value="Update!"/>
+    <label>
+        <select size="3" multiple name="roles" required>
+            <option disabled>Выберите роль</option>
+            <option th:each="role:${roles}" th:value="${role.getRole()}"
+                    th:text="${#strings.substringAfter(role.getRole().toLowerCase(), 'role_')}"
+                    th:selected="${user.getRoles().contains(role)}"></option>
+        </select>
+    </label><br><br>
+    <input type="submit" value="Обновить"/>
 </form>
-<form th:method="POST" th:action="@{/logout}">
 
-    <input type="submit" value="Logout"/>
-</form>
 </body>
 </html>

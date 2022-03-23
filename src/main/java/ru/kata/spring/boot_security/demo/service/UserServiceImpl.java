@@ -6,19 +6,24 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.dao.RolesRepository;
 import ru.kata.spring.boot_security.demo.dao.UserRepository;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
-
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserDetailsService {
     private UserRepository repository;
+    private RolesRepository rolesRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserRepository repository, RolesRepository rolesRepository) {
         this.repository = repository;
+        this.rolesRepository = rolesRepository;
     }
 
     @Transactional
@@ -37,8 +42,15 @@ public class UserServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public void update(long id, String name, String surname) {
-        repository.update(id, name, surname);
+    public void update(long id, String name, String surname, String[] roles) {
+        Set<Role> roleSet = rolesRepository.getRolesByName(Arrays.asList(roles));
+        repository.update(id, name, surname, roleSet);
+    }
+
+    @Transactional
+    public List<Role> allRoles() {
+
+        return rolesRepository.findAll();
     }
 
     @Transactional

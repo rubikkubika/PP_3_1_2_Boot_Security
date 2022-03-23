@@ -54,12 +54,16 @@ public class UserController {
     @GetMapping("/{id}/edit")
     public String edit(ModelMap modelMap, @PathVariable("id") long id) {
         modelMap.addAttribute("user", userService.getUserById(id));
+        modelMap.addAttribute("roles",userService.getUserById(id).getRoles());
         return "editUser";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") long id) {
-        userService.update(id, user.getName(), user.getSurname());
+    public String update(@ModelAttribute("user") User user,
+                         @PathVariable("id") long id,
+                         @RequestParam(value = "roles", required = false) String[] roles) {
+
+        userService.update(id, user.getName(), user.getSurname(), roles);
         return "redirect:/admin";
     }
 
