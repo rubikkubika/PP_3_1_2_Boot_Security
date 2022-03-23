@@ -11,6 +11,7 @@ import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -44,7 +45,8 @@ public class UserServiceImpl implements UserDetailsService {
     @Transactional
     public void update(long id, String name, String surname, String[] roles) {
         Set<Role> roleSet = rolesRepository.getRolesByName(Arrays.asList(roles));
-        repository.update(id, name, surname, roleSet);
+        repository.update(id, name, surname);
+        repository.getById(id).setRoles(roleSet);
     }
 
     @Transactional

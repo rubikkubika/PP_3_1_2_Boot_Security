@@ -17,7 +17,7 @@
     <input type="text" th:field="*{surname}" id="surname"><br><br>
 
     <label>
-        <select size="10" multiple name="roles" required>
+        <select size="10" multiple name="roles1" required>
             <option disabled>Выберите роль</option>
             <option th:each="role:${roles}" th:value="${role.getRole()}"
                     th:text="${#strings.substringAfter(role.getRole().toLowerCase(), 'role_')}"
