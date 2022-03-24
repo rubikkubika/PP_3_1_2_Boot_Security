@@ -11,6 +11,8 @@ import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +21,9 @@ import java.util.Set;
 public class UserServiceImpl implements UserDetailsService {
     private final UserRepository repository;
     private final RolesRepository rolesRepository;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Autowired
     public UserServiceImpl(UserRepository repository, RolesRepository rolesRepository) {
@@ -44,8 +49,8 @@ public class UserServiceImpl implements UserDetailsService {
     @Transactional
     public void update(User user, String[] roles) {
         Set<Role> roleSet = rolesRepository.getRolesByName(Arrays.asList(roles));
-        repository.getById(user.getId()).setRoles(roleSet);
-        repository.save(repository.getById(user.getId()));
+        user.setRoles(roleSet);
+        entityManager.merge(user);
     }
 
     @Transactional
