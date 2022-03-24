@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 public class UserController {
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
 
     @Autowired
     public UserController(UserServiceImpl userService) {
@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping(value = "/user")
     public String checkUser(ModelMap model, Principal principal) {
-                model.addAttribute("user", userService.getUserByUsername(principal.getName()));
+        model.addAttribute("user", userService.getUserByUsername(principal.getName()));
         return "user";
     }
 
@@ -54,7 +54,7 @@ public class UserController {
     @GetMapping("/{id}/edit")
     public String edit(ModelMap modelMap, @PathVariable("id") long id) {
         modelMap.addAttribute("user", userService.getUserById(id));
-        modelMap.addAttribute("roles",userService.allRoles());
+        modelMap.addAttribute("roles", userService.allRoles());
         return "editUser";
     }
 
@@ -63,7 +63,7 @@ public class UserController {
                          @PathVariable("id") long id,
                          @RequestParam(value = "roles1") String[] roles) {
 
-        userService.update(id, user.getName(), user.getSurname(), roles);
+        userService.update(user, roles);
         return "redirect:/admin";
     }
 

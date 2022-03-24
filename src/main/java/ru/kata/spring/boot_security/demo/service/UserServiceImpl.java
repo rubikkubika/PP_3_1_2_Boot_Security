@@ -11,15 +11,14 @@ import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserDetailsService {
-    private UserRepository repository;
-    private RolesRepository rolesRepository;
+    private final UserRepository repository;
+    private final RolesRepository rolesRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository repository, RolesRepository rolesRepository) {
@@ -43,10 +42,10 @@ public class UserServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public void update(long id, String name, String surname, String[] roles) {
+    public void update(User user, String[] roles) {
         Set<Role> roleSet = rolesRepository.getRolesByName(Arrays.asList(roles));
-        repository.update(id, name, surname);
-        repository.getById(id).setRoles(roleSet);
+        repository.getById(user.getId()).setRoles(roleSet);
+        repository.save(repository.getById(user.getId()));
     }
 
     @Transactional
