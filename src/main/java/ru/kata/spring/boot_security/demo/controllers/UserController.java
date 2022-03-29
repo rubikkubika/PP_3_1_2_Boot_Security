@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user,
+    public String update(User user,
                          @PathVariable("id") long id,
                          @RequestParam(value = "roles1") String[] roles) {
 

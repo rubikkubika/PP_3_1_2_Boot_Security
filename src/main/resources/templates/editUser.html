@@ -10,11 +10,20 @@
 
 <form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}" th:align="left">
 
+    <label for="username">Логин</label>
+    <input type="text" th:field="*{username}" id="username" required><br><br>
     <label for="name">Имя</label>
     <input type="text" th:field="*{name}" id="name"><br><br>
-
     <label for="surname">Фамилия</label>
     <input type="text" th:field="*{surname}" id="surname"><br><br>
+    <label for="age">Возраст</label>
+    <input type="text" th:field="*{age}" id="age"><br><br>
+    <label for="email">Электронный адрес</label>
+    <input type="text" th:field="*{email}" id="email"><br><br>
+    <label for="password">Пароль</label>
+    <input type="password" th:field="*{password}" id="password"><br><br>
+    <label>
+
 
     <label>
         <select size="10" multiple name="roles1" required>
