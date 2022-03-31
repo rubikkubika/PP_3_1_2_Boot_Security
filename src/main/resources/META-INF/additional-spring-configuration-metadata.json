@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "spring.secondDatasource.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.secondDatasource.url."
+    },
+    {
+      "name": "spring.securityDatasource.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.securityDatasource.username."
+    }
+  ] }
