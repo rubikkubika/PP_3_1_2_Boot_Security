@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserDetailsService {
     @PersistenceContext
     EntityManager entityManager;
 
+
     @Autowired
     public UserServiceImpl(UserRepository repository,
                            RolesRepository rolesRepository, PasswordEncoder passwordEncoder) {
@@ -42,9 +43,9 @@ public class UserServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public void saveUser(User user) {
-       // user.setPassword(passwordEncoder.encode(user.getPassword()));
-       // user.setRoles(rolesRepository.getRolesByName(Arrays.asList(roles)));
+    public void saveUser(User user, String[] roles) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(rolesRepository.getRolesByName(Arrays.asList(roles)));
         repository.save(user);
     }
 
@@ -55,13 +56,13 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Transactional
     public void update(User user, String[] roles) {
-  /*
+
         if (!user.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         } else {
             user.setPassword(repository.getById(user.getId()).getPassword());
         }
-        */
+
 
         Set<Role> roleSet = rolesRepository.getRolesByName(Arrays.asList(roles));
         user.setRoles(roleSet);

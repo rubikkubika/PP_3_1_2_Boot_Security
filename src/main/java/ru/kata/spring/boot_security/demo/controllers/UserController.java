@@ -8,7 +8,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
@@ -21,9 +20,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/admin")
-    public String getAllUser(ModelMap model) {
-        List<User> userList = userService.getAllUser();
-        model.addAttribute("users", userList);
+    public String getAllUser(ModelMap model, Principal principal) {
+        model.addAttribute("loggeduser", userService.getUserByUsername(principal.getName()));
+        model.addAttribute("users", userService.getAllUser());
+        model.addAttribute("roles", userService.allRoles());
         return "users";
     }
 
@@ -39,15 +39,18 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "newUser")
-    public String createUser(ModelMap modelMap) {
+    @GetMapping(value = "/newuser")
+    public String createUser(ModelMap modelMap, Principal principal) {
         modelMap.addAttribute("user", new User());
-        return "formNewUser";
+        modelMap.addAttribute("roles", userService.allRoles());
+        modelMap.addAttribute("loggeduser", userService.getUserByUsername(principal.getName()));
+        return "newuser";
     }
 
     @PostMapping()
-    public String createUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+    public String createUser(@ModelAttribute("user") User user,
+                             @RequestParam(value = "roles1") String[] roles) {
+        userService.saveUser(user, roles);
         return "redirect:/admin";
     }
 
@@ -58,9 +61,8 @@ public class UserController {
         return "editUser";
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/admin")
     public String update(User user,
-                         @PathVariable("id") long id,
                          @RequestParam(value = "roles1") String[] roles) {
 
         userService.update(user, roles);
