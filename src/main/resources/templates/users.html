@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec=“http://www.thymeleaf.org/extras/spring-security”>
 <html lang="ru">
 <head>
     <!-- Required meta tags -->
@@ -124,9 +125,11 @@
     <div class="row id=" main>
         <div class="col-md-1">
             <ul class="nav nav-pills flex-column flex-grow-1 ">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Admin</a>
-                </li>
+                <div>
+                    <li class="nav-item">
+                        <a  class="nav-link active" href="#">Admin</a>
+                    </li>
+                </div>
                 <li class="nav-item">
                     <a class="nav-link" href="/user">User</a>
                 </li>

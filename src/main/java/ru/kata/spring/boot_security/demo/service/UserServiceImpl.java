@@ -16,7 +16,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -39,7 +41,10 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Transactional
     public List<User> getAllUser() {
-        return repository.findAll();
+
+        return repository.findAll().stream()
+                .filter( x -> !Objects.equals(x.getUsername(), "admin"))
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -56,14 +61,6 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Transactional
     public void update(User user, String[] roles) {
-
-        if (!user.getPassword().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        } else {
-            user.setPassword(repository.getById(user.getId()).getPassword());
-        }
-
-
         Set<Role> roleSet = rolesRepository.getRolesByName(Arrays.asList(roles));
         user.setRoles(roleSet);
         entityManager.merge(user);

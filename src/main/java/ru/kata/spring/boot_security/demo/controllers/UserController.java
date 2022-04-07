@@ -34,8 +34,12 @@ public class UserController {
     }
 
     @GetMapping(value = "/")
-    public String welcome() {
-        return "index";
+
+    public String welcome(ModelMap model, Principal principal) {
+        model.addAttribute("loggeduser", userService.getUserByUsername(principal.getName()));
+        model.addAttribute("users", userService.getAllUser());
+        model.addAttribute("roles", userService.allRoles());
+        return "users";
     }
 
 
