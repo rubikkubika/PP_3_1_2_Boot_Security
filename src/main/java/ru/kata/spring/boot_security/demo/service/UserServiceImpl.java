@@ -43,14 +43,12 @@ public class UserServiceImpl implements UserDetailsService {
     public List<User> getAllUser() {
 
         return repository.findAll().stream()
-                .filter( x -> !Objects.equals(x.getUsername(), "admin"))
+                .filter(x -> !Objects.equals(x.getUsername(), "admin"))
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public void saveUser(User user, String[] roles) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(rolesRepository.getRolesByName(Arrays.asList(roles)));
+    public void saveUser(User user) {
         repository.save(user);
     }
 
@@ -60,16 +58,13 @@ public class UserServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public void update(User user, String[] roles) {
-        Set<Role> roleSet = rolesRepository.getRolesByName(Arrays.asList(roles));
-        user.setRoles(roleSet);
+    public void update(User user) {
         entityManager.merge(user);
     }
 
     @Transactional
-    public List<Role> allRoles() {
-
-        return rolesRepository.findAll();
+    public Set<Role> getAllRoles() {
+        return  rolesRepository.findAllRolesInSet();
 
 
     }
