@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api")
 public class UserRestController {
@@ -24,5 +26,10 @@ public class UserRestController {
     public ResponseEntity<User> getAuthentication(Authentication authentication) {
         User user = userService.getUserByUsername(authentication.getName());
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<User> showUser(Principal principal) {
+        return new ResponseEntity<>(userService.getUserByUsername(principal.getName()), HttpStatus.OK);
     }
 }
