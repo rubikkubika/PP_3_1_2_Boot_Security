@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Transactional
     public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
     }
 

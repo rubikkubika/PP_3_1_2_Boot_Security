@@ -183,19 +183,19 @@
                                     <div class="card-body text-center">
                                         <form class="form-container">
                                             <div class="form-group w-25 p-auto m-auto">
-                                                <label for="firstName">Имя</label>
+                                                <label for="firstName">Name</label>
                                                 <input type="text" class="form-control" id="firstName"
                                                        placeholder="имя" name="name">
                                             </div>
 
                                             <div class="form-group w-25 p-auto m-auto">
-                                                <label for="lastName" class="pt-md-2">Фамилия</label>
+                                                <label for="lastName" class="pt-md-2">Surname</label>
                                                 <input type="text" class="form-control" id="lastName"
                                                        placeholder="фамилия" name="surname">
                                             </div>
 
                                             <div class="form-group w-25 p-auto m-auto">
-                                                <label for="age" class="pt-md-2">Возраст</label>
+                                                <label for="age" class="pt-md-2">Age</label>
                                                 <input type="number" class="form-control" id="age"
                                                        placeholder="возраст" name="age">
                                             </div>
@@ -207,13 +207,13 @@
                                             </div>
 
                                             <div class="form-group w-25 p-auto m-auto">
-                                                <label for="password" class="pt-md-2">Пароль</label>
+                                                <label for="password" class="pt-md-2">Password</label>
                                                 <input type="password" class="form-control" id="password"
                                                        placeholder="Пароль" name="password" required>
                                             </div>
 
                                             <div class="form-group w-25 p-auto m-auto">
-                                                <label for="roles" class="pt-md-2">Выберите роль</label>
+                                                <label for="roles" class="pt-md-2">Rolesь</label>
                                                 <select class="custom-select form-control" size="2" id="roles" multiple
                                                         required>
                                                 </select>
@@ -238,7 +238,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Изменение пользователя</h5>
+                            <h5 class="modal-title" id="editModalLabel">Edit user</h5>
                             <button type="submit" class="close" aria-label="Close" data-bs-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -250,15 +250,15 @@
                                     <input type="number" class="form-control" id="editId" name="id" readonly>
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="editFirstName" class="col-form-label pt-md-2">Имя</label>
+                                    <label for="editFirstName" class="col-form-label pt-md-2">Name</label>
                                     <input type="text" class="form-control" id="editFirstName" name="name">
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="editSurName" class="col-form-label pt-md-2">Фамилия</label>
+                                    <label for="editSurName" class="col-form-label pt-md-2">Surname</label>
                                     <input type="text" class="form-control" id="editSurName" name="surname">
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="editAge" class="col-form-label pt-md-2">Возраст</label>
+                                    <label for="editAge" class="col-form-label pt-md-2">Age</label>
                                     <input type="number" class="form-control" id="editAge" name="age">
                                 </div>
                                 <div class="form-group m-auto col-md-6">
@@ -266,11 +266,11 @@
                                     <input type="text" class="form-control" id="editUsername" name="username">
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="editPassword" class="col-form-label pt-md-2">Пароль</label>
+                                    <label for="editPassword" class="col-form-label pt-md-2">Password</label>
                                     <input type="password" class="form-control" id="editPassword" name="password">
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="editRoles" class="pt-md-2">Выберите роль</label>
+                                    <label for="editRoles" class="pt-md-2">Roles</label>
                                     <select class="custom-select form-control" size="2"
                                             id="editRoles" multiple required>
                                     </select>
@@ -278,10 +278,10 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Закрыть
+                                        data-bs-dismiss="modal">Close
                                 </button>
                                 <button type="submit" class="btn btn-primary active"
-                                        aria-pressed="true">Изменить
+                                        aria-pressed="true">Edit
                                 </button>
                             </div>
                         </form>
@@ -294,7 +294,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel">Удаление пользователя</h5>
+                            <h5 class="modal-title" id="deleteModalLabel">Delete user</h5>
                             <button type="submit" class="close" aria-label="Close" data-bs-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -306,28 +306,27 @@
                                     <input type="number" class="form-control" id="deleteId" name="id" readonly>
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="deleteFirstName" class="col-form-label pt-md-2">Имя</label>
+                                    <label for="deleteFirstName" class="col-form-label pt-md-2">Name</label>
                                     <input type="text" class="form-control" id="deleteFirstName" name="name"
                                            readonly>
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="deleteSurName" class="col-form-label pt-md-2">Фамилия</label>
+                                    <label for="deleteSurName" class="col-form-label pt-md-2">Surname</label>
                                     <input type="text" class="form-control" id="deleteSurName" name="surname"
                                            readonly>
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="deleteAge" class="col-form-label pt-md-2">Возраст</label>
+                                    <label for="deleteAge" class="col-form-label pt-md-2">Age</label>
                                     <input type="number" class="form-control" id="deleteAge" name="age"
                                            readonly>
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="deleteUsername" class="col-form-label pt-md-2">Электронная
-                                        почта</label>
+                                    <label for="deleteUsername" class="col-form-label pt-md-2">Username</label>
                                     <input type="text" class="form-control" id="deleteUsername" name="username"
                                            readonly>
                                 </div>
                                 <div class="form-group m-auto col-md-6">
-                                    <label for="deleteRoles" class="pt-md-2">Выберите роль</label>
+                                    <label for="deleteRoles" class="pt-md-2">Roles</label>
                                     <select class="custom-select form-control" size="2"
                                             id="deleteRoles" multiple readonly>
                                     </select>
@@ -335,10 +334,10 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Закрыть
+                                        data-bs-dismiss="modal">Close
                                 </button>
                                 <button type="submit" class="btn btn-danger active"
-                                        aria-pressed="true">Удалить
+                                        aria-pressed="true">Delete
                                 </button>
                             </div>
                         </form>
@@ -351,6 +350,7 @@
 
 
     <script src="admin.js"></script>
+</div>
 </body>
 
 

@@ -7,7 +7,7 @@ function getAuthenticationForUserPage() {
     fetch(urlHead)
         .then(res => res.json())
         .then(user => {
-            let role = user.username + ' с ролями: '
+            let role = user.username + ' with roles: '
             role += user.roles.map(r=>r.role.replace('ROLE_', ' '))
             header.innerHTML = role
         })
