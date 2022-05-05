@@ -10,10 +10,6 @@ import java.util.Set;
 
 public interface RolesRepository extends JpaRepository<Role, Long> {
     @Transactional
-    @Query("select r from Role r where r.role in (:roles)")
-    Set<Role> getRolesByName(List<String> roles);
-
-    @Transactional
     @Query("select r from Role r")
     Set<Role> findAllRolesInSet();
 }

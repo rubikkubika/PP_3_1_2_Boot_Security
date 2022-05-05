@@ -14,7 +14,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -54,20 +53,8 @@ public class UserServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public User getUserById(long id) {
-        return repository.getById(id);
-    }
-
-    @Transactional
-    public void update(User user) {
-        entityManager.merge(user);
-    }
-
-    @Transactional
     public Set<Role> getAllRoles() {
-        return  rolesRepository.findAllRolesInSet();
-
-
+        return rolesRepository.findAllRolesInSet();
     }
 
     @Transactional

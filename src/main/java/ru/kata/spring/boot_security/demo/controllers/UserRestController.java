@@ -1,9 +1,10 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,11 +26,11 @@ public class UserRestController {
     @GetMapping("/header")
     public ResponseEntity<User> getAuthentication(Authentication authentication) {
         User user = userService.getUserByUsername(authentication.getName());
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/user")
-    public ResponseEntity<User> showUser(Principal principal) {
-        return new ResponseEntity<>(userService.getUserByUsername(principal.getName()), HttpStatus.OK);
+    public ResponseEntity<User> showUser(@AuthenticationPrincipal User principal) {
+        return ResponseEntity.ok(principal);
     }
 }

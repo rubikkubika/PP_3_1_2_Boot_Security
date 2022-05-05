@@ -1,7 +1,7 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.Role;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class AdminRestController {
     private final UserServiceImpl userService;
 
@@ -22,30 +22,30 @@ public class AdminRestController {
         this.userService = userService;
     }
 
-    @GetMapping("/admin")
+    @GetMapping
     public ResponseEntity<List<User>> showAllUsers() {
-        return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
+        return ResponseEntity.ok(userService.getAllUser());
     }
-    @GetMapping("/admin/allroles")
+    @GetMapping("/allroles")
     public ResponseEntity<Set<Role>> getAllRoles() {
-        return new ResponseEntity<Set<Role>>(userService.getAllRoles(), HttpStatus.OK);
+        return ResponseEntity.ok(userService.getAllRoles());
     }
 
-    @PostMapping("/admin")
+    @PostMapping
     public ResponseEntity<Void> createUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/admin/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteByID(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/admin")
+    @PutMapping
     public ResponseEntity<Void> updateUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }

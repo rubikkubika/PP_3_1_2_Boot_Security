@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -122,9 +124,9 @@
     <div class="row id=" main>
         <div class="col-md-1">
             <ul class="nav nav-pills flex-column flex-grow-1 ">
-                <div>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <li class="nav-item">
-                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/admin">Admin</a>
+                        <a class="nav-link" href="/admin">Admin</a>
                     </li>
                 </div>
                 <li class="nav-item">
@@ -154,6 +156,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -161,3 +164,4 @@
                         </div>
                     </div>
                     <script src="userInfo.js"></script>
+
