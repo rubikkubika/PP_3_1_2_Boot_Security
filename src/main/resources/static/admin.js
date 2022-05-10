@@ -33,7 +33,6 @@ const editAge = document.getElementById('editAge')
 const editUsername = document.getElementById('editUsername')
 const editPassword = document.getElementById('editPassword')
 const editRoles = document.getElementById('editRoles')
-
 function getAuthentication() {
     fetch(urlHead)
         .then(res => res.json())
@@ -43,9 +42,7 @@ function getAuthentication() {
             header.innerHTML = role
         })
 }
-
 getAuthentication()
-
 const fillingUserTable = () => {
     let res = ''
     fetch(url)
@@ -69,9 +66,7 @@ const fillingUserTable = () => {
         })
 
 }
-
 fillingUserTable()
-
 function getAllRoles(target) {
     fetch(`${url}/allroles`)
         .then(res => res.json())
@@ -83,12 +78,9 @@ function getAllRoles(target) {
             target.innerHTML = roleList
         })
 }
-
 getAllRoles(roles)
-
 let headers = new Headers();
 headers.append('Content-Type', 'application/json; charset=utf-8');
-
 let roleList = (options) => {
     let array = []
     for (let i = 0; i < options.length; i++) {
@@ -99,7 +91,6 @@ let roleList = (options) => {
     }
     return array;
 }
-
 newUser.addEventListener('submit', (e) => {
     e.preventDefault()
     let options = document.querySelector('#roles');
@@ -123,7 +114,6 @@ newUser.addEventListener('submit', (e) => {
     username.value = ''
     password.value = ''
 })
-
 const on = (element, event, selector, handler) => {
     element.addEventListener(event, e => {
         if (e.target.closest(selector)) {
@@ -131,7 +121,6 @@ const on = (element, event, selector, handler) => {
         }
     })
 }
-
 on(document, 'click', '.btnDel', e => {
     e.preventDefault()
     let target = e.target.parentNode.parentNode
@@ -144,8 +133,6 @@ on(document, 'click', '.btnDel', e => {
     delAge.value = target.children[4].innerHTML
     delRoles.value = getAllRoles(delRoles)
 })
-
-
 delModal.addEventListener('submit', (e) => {
     e.preventDefault()
     fetch(`${url}/${id}`, {
